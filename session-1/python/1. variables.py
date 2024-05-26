@@ -118,12 +118,13 @@ print(var)
 # Assignment 4: Create a variable, assign it a value of one type, then reassign it to a different type and print both.
 # Write your code below:
 
-var=33
-print(var)
+var1=33
+print(var1)
 
-var="string"
-print(var)
+var1="string"
+print(var1)
 
 
 # Congratulations on completing this part of the Python workshop!
 # Review the assignments, try to solve them, and check your understanding of variables and data types.
+#rahat
