@@ -4,7 +4,7 @@ def single_news(url):
     session = HTMLSession()
     try:
         response = session.get(url)
-        # response.html.render()  # This will download Chromium if not found
+        response.html.render()  # This will download Chromium if not found
 
         # print(response.html.html)
         title = response.html.find('h1', first=True).text

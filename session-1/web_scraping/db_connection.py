@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
+
+
 def create_db_connection():
     """
     Create a database connection to the MySQL database specified by the db_name.
@@ -27,3 +29,11 @@ def create_db_connection():
     except Error as e:
         print(f"The error '{e}' occurred")
         return None
+
+# Test the connection
+if __name__ == "__main__":
+    connection = create_db_connection()
+    if connection:
+        print("Connection object:", connection)
+    else:
+        print("Failed to connect to the database")

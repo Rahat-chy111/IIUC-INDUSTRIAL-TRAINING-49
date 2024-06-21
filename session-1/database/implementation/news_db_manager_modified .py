@@ -1,32 +1,7 @@
 import os
 import mysql.connector
 from mysql.connector import Error
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
-
-def create_db_connection():
-    """
-    Create a database connection to the MySQL database specified by the db_name.
-
-    Returns
-    -------
-    connection : mysql.connector.connection.MySQLConnection
-        The connection object to the database.
-    """
-    try:
-        connection = mysql.connector.connect(
-            host=os.getenv("DB_HOST"),
-            user=os.getenv("DB_USER"),
-            passwd=os.getenv("DB_PASS"),
-            database=os.getenv("DB_NAME")
-        )
-        print("MySQL Database connection successful")
-        return connection
-    except Error as e:
-        print(f"The error '{e}' occurred")
-        return None
+from db_connection import create_db_connection
 
 def execute_query(connection, query):
     """
@@ -47,9 +22,7 @@ def execute_query(connection, query):
     try:
         cursor.execute(query)
         connection.commit()
-
         print("Query successful")
-        
     except Error as e:
         print(f"The error '{e}' occurred")
 
@@ -99,7 +72,7 @@ def create_tables(connection):
     );
     """
     create_reporters_table = """
-    CREATE TABLE IF NOT EXISTS reporters (
+    CREATE TABLE IF NOT EXISTS reporters(
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL
@@ -109,7 +82,14 @@ def create_tables(connection):
     CREATE TABLE IF NOT EXISTS publishers (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
-        email VARCHAR(255) UNIQUE NOT NULL
+        email VARCHAR(255) UNIQUE NOT NULL,
+        phone_number VARCHAR(255) UNIQUE NOT NULL,
+        head_office_address VARCHAR(255) NOT NULL,
+        website VARCHAR(255) UNIQUE NOT NULL,
+        facebook VARCHAR(255) UNIQUE NOT NULL,
+        twitter VARCHAR(255) UNIQUE NOT NULL,
+        linkedin VARCHAR(255) UNIQUE NOT NULL,
+        instagram VARCHAR(255) UNIQUE NOT NULL
     );
     """
     create_news_table = """
@@ -155,29 +135,13 @@ def create_tables(connection):
 if __name__ == "__main__":
     conn = create_db_connection()
     if conn is not None:
-        create_tables(conn)
-        # read_categories_query = "SELECT * FROM categories"
-        # news_categories = execute_read_query(conn, read_categories_query)
-        # print(news_categories)
+         create_tables(conn)
+         
+        #  read_categories_query = "SELECT * FROM categories"
+        #  news_categories = execute_read_query(conn, read_categories_query)
+        #  print(news_categories)
 
-        # read_reporters_query = "SELECT * FROM reporters"
-        # news_reporters = execute_read_query(conn, read_reporters_query)
-        # print(news_reporters)
-
-        # read_publishers_query = "SELECT * FROM publishers"
-        # news_publishers = execute_read_query(conn, read_publishers_query)
-        # print(news_publishers)
-
-        # read_news_query = "SELECT * FROM news"
-        # news = execute_read_query(conn, read_news_query)
-        # print(news)
-
-        # read_images_query = "SELECT * FROM images"
-        # news_images = execute_read_query(conn, read_images_query)
-        # print(news_images)
-
-        # read_summaries_query = "SELECT * FROM summaries"
-        # news_summaries = execute_read_query(conn, read_summaries_query)
-        # print(news_summaries)
-
+        #  read_reporters_query = "SELECT * FROM reporters"
+        #  news_reporters = execute_read_query(conn, read_reporters_query)
+        #  print(news_reporters)
 

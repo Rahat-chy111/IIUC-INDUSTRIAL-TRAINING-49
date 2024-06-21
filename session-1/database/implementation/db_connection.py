@@ -3,7 +3,7 @@ import mysql.connector
 from mysql.connector import Error
 from dotenv import load_dotenv
 
-# Load environment variables
+
 load_dotenv()
 
 def create_db_connection():
